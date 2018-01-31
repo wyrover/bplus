@@ -4,6 +4,9 @@
 
 Both database engine and node.js bindings are in development now, use carefully.
 
+
+让其链接 pthread-win32, 不过还未编译成功, windows 下暂时不可用
+
 ## Compiling
 
 ```bash

@@ -1,7 +1,7 @@
 #include "private/compressor.h"
 #include "private/errors.h"
 
-#include <unistd.h> /* size_t */
+//#include <unistd.h> /* size_t */
 
 
 #if BP_USE_SNAPPY == 1

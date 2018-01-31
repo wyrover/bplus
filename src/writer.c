@@ -4,12 +4,15 @@
 #include "private/threads.h"
 
 #include <fcntl.h> /* open */
-#include <unistd.h> /* close, write, read */
+//#include <unistd.h> /* close, write, read */
+#include <io.h>
 #include <sys/stat.h> /* S_IWUSR, S_IRUSR */
 #include <stdlib.h> /* malloc, free */
 #include <stdio.h> /* sprintf */
 #include <string.h> /* memset */
 #include <errno.h> /* errno */
+
+typedef size_t ssize_t;
 
 
 int bp__writer_create(bp__writer_t* w, const char* filename) {
@@ -22,9 +25,11 @@ int bp__writer_create(bp__writer_t* w, const char* filename) {
   if (w->filename == NULL) return BP_EALLOC;
   memcpy(w->filename, filename, filename_length);
 
+  /*w->fd = open(filename,
+			   O_RDWR | O_APPEND | O_CREAT,
+			   S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);*/
   w->fd = open(filename,
-               O_RDWR | O_APPEND | O_CREAT,
-               S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);
+	  O_RDWR | O_APPEND | O_CREAT);
   if (w->fd == -1) goto error;
 
   /* Determine filesize */
@@ -67,7 +72,7 @@ int bp__writer_compact_name(bp__writer_t* w, char** compact_name) {
   if (filename == NULL) return BP_EALLOC;
 
   sprintf(filename, "%s.compact", w->filename);
-  if (access(filename, F_OK) != -1 || errno != ENOENT) {
+  if (_access(filename, 0) != -1 || errno != ENOENT) {
     free(filename);
     return BP_ECOMPACT_EXISTS;
   }

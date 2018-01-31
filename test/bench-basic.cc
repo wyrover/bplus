@@ -1,5 +1,8 @@
 #include "test.h"
 
+#define BENCH_START 
+#define BENCH_END
+
 TEST_START("basic benchmark", "basic-bench")
 
   const int num = 500000;

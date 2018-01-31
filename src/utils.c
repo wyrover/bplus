@@ -1,7 +1,8 @@
 #include "private/utils.h"
 
 #include <stdint.h> /* uint64_t */
-#include <arpa/inet.h> /* nothl, htonl */
+//#include <arpa/inet.h> /* nothl, htonl */
+#include <WinSock2.h>
 
 
 /* Thomas Wang, Integer Hash Functions. */

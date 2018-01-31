@@ -1,7 +1,10 @@
 #ifndef _PRIVATE_COMPRESSOR_H_
 #define _PRIVATE_COMPRESSOR_H_
 
-#include <unistd.h> /* size_t */
+//#include <unistd.h> /* size_t */
+#include <io.h>
+
+typedef size_t ssize_t;
 
 #ifdef __cplusplus
 extern "C" {
